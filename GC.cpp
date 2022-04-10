@@ -7,11 +7,9 @@ int main()
 {
     int N, M, p, q, obj = 0, opt = 0;
     cin >> N >> M;
-    vector <vector <int>> arr;
     vector <vector <int>> matrix;
     vector <int> color;
     vector <int> sum;
-    arr.resize(M);
     color.resize(N);
     matrix.resize(N);
     sum.resize(N);
@@ -23,10 +21,7 @@ int main()
     }
     for (int i = 0; i < M; i++)
     {
-        arr[i].resize(2);
         cin >> p >> q;
-        arr[i][0] = p;
-        arr[i][1] = q;
         p--;
         q--;
         matrix[p][q] = 1;
@@ -45,37 +40,66 @@ int main()
     while (t == 0)
     {
         c++;
+        t = 1;
+        u = 1;
+        for (int i = 0; i < N; i++)
+        {
+            if ((sum[i] > max) && (color[i]==0)) max = sum[i];
+            k = i;
+        }
+        color[k] = c;
         while (u == 0)
         {
 
-            t = 1;
             for (int i = 0; i < N; i++)
             {
-                if (sum[i] > max) max = sum[i];
-                k = i;
-            }
-            color[k] = c;
-            for (int i = 0; i < N; i++)
-            {
-                if (color[i] == 0) t = 0;
+                if (matrix[k][i] == 1)
+                {
+                    matrix[k][i] = 2;
+                    matrix[i][k] = 2;
+                } 
             }
             for (int i = 0; i < N; i++)
             {
+                if ((matrix[k][i] == 0) && (color[i] == 0))
+                {
+                    color[i] = c;
+                    k = i;
+                    break;
+                }
+            }
+            for (int i = 0; i < N; i++)
+            {
+                for (int j = 0; j < N; j++)
+                {
+                    if (matrix[i][j] == 1) u = 0;
+                };
+                cout << endl;
 
             }
 
         }
+        for (int i = 0; i < N; i++)
+        {
+            for (int j = 0; j < N; j++)
+            {
+                if (matrix[i][j] == 2) matrix[i][j] = 1;
+            };
+            cout << endl;
+
+        }
+
+        for (int i = 0; i < N; i++)
+        {
+            if (color[i] == 0) t = 0;
+        }
 
     }
 
-    for (int i = 0; i < M; i++)
+    cout << c << " " << opt << endl;
+    for (int i = 0; i < N; i++)
     {
-        for (int j = 0; j < 2; j++)
-        {
-            cout << arr[i][j] << " ";
-        };
-        cout << endl;
-
+        cout << color[i] << " ";
     }
 
 
