@@ -21,8 +21,8 @@ int main()
         cin >> p >> q;
         matrix[p][q] = 1;
         matrix[q][p] = 1;
-        connect[p].first ++;
-        connect[q].first ++;
+        connect[p].first += 1;
+        connect[q].first += 1;
         connect[p].second = p;
         connect[q].second = q;
     }
@@ -56,7 +56,7 @@ int main()
             }
         }
     }
-    for (int i = 0; i < N; i++) 
+    for (int i = 0; i <color.size(); i++) 
     {
         if (color[i] > obj) 
         {
